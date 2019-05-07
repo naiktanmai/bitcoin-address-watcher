@@ -1,0 +1,19 @@
+{
+  "name": "bitcoin-watcher",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:dev": "nodemon index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bitcoind-rpc": "^0.7.2",
+    "bitcoinjs-lib": "^5.0.2",
+    "dotenv": "^7.0.0",
+    "pg": "^7.10.0",
+    "zeromq": "^5.1.0"
+  }
+}

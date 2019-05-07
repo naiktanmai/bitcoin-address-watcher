@@ -1,0 +1,40 @@
+version: "3.1"
+services:
+  db:
+    image: postgres:11.2-alpine
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: postgreswewq12XXXTESTPWD
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./postgres/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+      - ./postgres/scripts:/scripts
+
+    ports:
+      - "5432:5432"
+
+  bitcoin-core:
+    image: ruimarinho/bitcoin-core:0.17.1-alpine
+    volumes:
+      - ./bitcoin:/home/bitcoin/.bitcoin
+    ports:
+      - 18332:18332
+      - 29000:29000
+    command: -printtoconsole
+      -debug=rpc
+      -debug=http
+      -txindex=1
+
+  # watcher:
+  #   build:
+  #     context: ./watcher_node
+  #     dockerfile: Dockerfile
+  #   links:
+  #     - bitcoin-core
+  #     - db
+  #   volumes:
+  #     - ./watcher_node:/usr/src/app/
+
+volumes:
+  pgdata:
+    driver: local
